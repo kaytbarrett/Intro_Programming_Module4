@@ -25,12 +25,8 @@ public class Calendar {
         m = input.nextInt();
         y = input.nextInt();
 
-        System.out.println();
-
         // Call the function printMonthCalender and pass the arguments of month and year
         printMonthCalendar(m, y);
-
-        System.out.println();
 
         // Close scanner
         input.close();
@@ -41,8 +37,11 @@ public class Calendar {
         int d = 1;
         int startDay = getStartDay(m, d, y);
         int numDaysInMonth = getNumDaysInMonth(m, y);
+
+        System.out.println("\n");
         printMonthHeader(m, y);
         printMonthBody(startDay, numDaysInMonth);
+        System.out.println("\n\n");
     }
 
     public static int getStartDay( int m, int d, int y )
@@ -74,23 +73,38 @@ public class Calendar {
         System.out.println("-----------------------------");
     }
 
-    public static void printMonthBody(int m, int y)
+    public static void printMonthBody(int startDay, int numDaysInMonth)
     {
-        int numDaysInMonth = getNumDaysInMonth(m, y);
         System.out.print(" Sun Mon Tue Wed Thu Fri Sat");
         System.out.println();
+        int lines = 0;
+
+        if (startDay == 7 )
+        {
+            // Do nothing
+        } else 
+        {
+            for (int j = 0; j < startDay; j++)
+            {
+                System.out.print("    ");
+                lines++;
+            }
+        }
+        
 
         for (int i = 1; i <= numDaysInMonth; i++)
         {
-            if (i < 10) {
-                System.out.print("   " + i);
-            } else {
-                System.out.print("  " + i);
-            }
-    
-            if (i % 7 == 0 || i == numDaysInMonth) {
+            if (lines % 7 == 0 && lines != 0) {
                 System.out.println();
             }
+
+            if (i < 10) {
+                System.out.print("   " + i );
+            } else {
+                System.out.print("  " + i );
+            }
+    
+            lines++;
         }
     }
 
